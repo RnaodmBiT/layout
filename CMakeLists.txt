@@ -5,7 +5,7 @@ option(TK_BUILD_SHARED "TK_BUILD_SHARED" ON)
 
 file(GLOB SOURCES src/*.cpp)
 file(GLOB HEADERS include/*.hpp)
-add_definitions(-DTK_BUILD)
+add_definitions(-DTK_BUILD_LAYOUT)
 
 set(BUILD_MODE STATIC)
 if (TK_BUILD_SHARED)
