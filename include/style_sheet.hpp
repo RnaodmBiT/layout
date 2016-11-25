@@ -40,8 +40,8 @@ namespace tk {
 
             static IResource* loadFromFile(const std::string& filename);
 
-            const Style& get(const std::string& style);
-            const Style& operator[](const std::string& style);
+            const Style& get(const std::string& style) const;
+            const Style& operator[](const std::string& style) const;
             bool has(const std::string& name);
         };
 

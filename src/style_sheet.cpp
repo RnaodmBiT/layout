@@ -103,11 +103,11 @@ namespace tk {
             return sheet;
         }
 
-        const Style& StyleSheet::get(const std::string& style) {
+        const Style& StyleSheet::get(const std::string& style) const {
             return impl->get(style);
         }
 
-        const Style& StyleSheet::operator[](const std::string& style) {
+        const Style& StyleSheet::operator[](const std::string& style) const {
             return impl->get(style);
         }
 

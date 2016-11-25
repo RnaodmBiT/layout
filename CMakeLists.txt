@@ -14,4 +14,4 @@ if (TK_BUILD_SHARED)
 endif()
 
 add_library(tk-layout ${BUILD_MODE} ${SOURCES} ${HEADERS})
-target_link_libraries(tk-layout tk-core)
+target_link_libraries(tk-layout tk-core tk-graphics)
