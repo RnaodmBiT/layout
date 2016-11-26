@@ -12,12 +12,26 @@ namespace tk {
 
             void addDefaultTypes() {
                 addType("text", [] (const std::string& name, const json& data, const Style& style, const ResourceCollection& resources) {
-                    DrawableNode* node = new TextNode(name,
-                                                      resources.get<Font>(style.getFont()),
-                                                      data["text"],
-                                                      style.getFontSize());
+                    TextNode* node = new TextNode(name,
+                                                  resources.get<Font>(style.getFont()),
+                                                  data["text"],
+                                                  style.getFontSize());
                     node->setTint(style.getColor());
                     return node;
+                });
+
+                addType("panel", [] (const std::string& name, const json& data, const Style& style, const ResourceCollection& resources) {
+                    Vec2f size{ data["size"][0], data["size"][1] };
+                    ShapeNode* node = new ShapeNode(name,
+                                                    Shape::rectangle({ 0, 0 }, size),
+                                                    nullptr,
+                                                    size);
+                    node->setTint(style.getColor());
+                    return node;
+                });
+
+                addType("group", [] (const std::string& name, const json& data, const Style& style, const ResourceCollection& resources) {
+                    return new DrawableNode(name);
                 });
             }
 
@@ -26,10 +40,10 @@ namespace tk {
                 builders[name] = constructor;
             }
 
-            DrawableNode* build(const std::string& name, const json& data, const StyleSheet& styles, const ResourceCollection& resources) {
+            DrawableNode* build(const std::string& name, const json& data, const Style& style, const ResourceCollection& resources) {
                 std::string type = data["type"];
                 tk_assert(builders.count(type), format("No builder for '%%' type", type));
-                return builders[type](name, data, styles.get(data["style"]), resources);
+                return builders[type](name, data, style, resources);
             }
         };
 
@@ -57,7 +71,7 @@ namespace tk {
             impl->addType(name, constructor);
         }
 
-        DrawableNode* UIFactory::build(const std::string& name, const json& data, const StyleSheet& styles, const ResourceCollection& resources) {
+        DrawableNode* UIFactory::build(const std::string& name, const json& data, const Style& styles, const ResourceCollection& resources) {
             return impl->build(name, data, styles, resources);
         }
     }

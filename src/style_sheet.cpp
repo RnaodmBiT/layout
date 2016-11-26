@@ -74,28 +74,28 @@ namespace tk {
                 Style& style = sheet->impl->get(it.key());
                 const json& data = it.value();
 
-                if (data.find("parent") != data.end()) {
+                if (data.count("parent")) {
                     tk_assert(sheet->has(data["parent"]), format("Error loading style sheet '%%'. Missing reference to style '%%'",
                               filename, data["parent"]));
 
                     style.parent = &sheet->impl->get(data["parent"]);
                 }
 
-                if (data.find("padding") != data.end()) {
+                if (data.count("padding")) {
                     const auto& p = data["padding"];
                     style.padding = new Vec4i{ p[0], p[1], p[2], p[3] };
                 }
 
-                if (data.find("color") != data.end()) {
+                if (data.count("color")) {
                     style.color = createColorFromHex(data["color"]);
                 }
 
-                if (data.find("font") != data.end()) {
+                if (data.count("font")) {
                     const std::string& font = data["font"];
                     style.font = new std::string(font.begin(), font.end());
                 }
 
-                if (data.find("fontSize") != data.end()) {
+                if (data.count("fontSize")) {
                     style.fontSize = new int(data["fontSize"]);
                 }
             }

@@ -24,7 +24,7 @@ namespace tk {
             void addDefaultTypes();
             void addType(const std::string& name, const Builder& constructor);
 
-            graphics::DrawableNode* build(const std::string& name, const core::json& data, const StyleSheet& styles, const core::ResourceCollection& resources);
+            graphics::DrawableNode* build(const std::string& name, const core::json& data, const Style& style, const core::ResourceCollection& resources);
         };
 
     }
