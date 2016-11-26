@@ -17,18 +17,18 @@ namespace tk {
         }
 
         const core::Vec4i& Style::getPadding() const {
-            static core::Vec4i default;
-            return padding ? *padding : (parent ? parent->getPadding() : default);
+            static core::Vec4i def;
+            return padding ? *padding : (parent ? parent->getPadding() : def);
         }
 
         const core::Vec4f& Style::getColor() const {
-            static core::Vec4f default;
-            return color ? *color : (parent ? parent->getColor() : default);
+            static core::Vec4f def;
+            return color ? *color : (parent ? parent->getColor() : def);
         }
 
         const std::string& Style::getFont() const {
-            static std::string default;
-            return font ? *font: (parent ? parent->getFont() : default);
+            static std::string def;
+            return font ? *font: (parent ? parent->getFont() : def);
         }
 
         int Style::getFontSize() const {

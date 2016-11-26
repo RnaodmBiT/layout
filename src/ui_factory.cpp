@@ -22,8 +22,9 @@ namespace tk {
 
                 addType("panel", [] (const std::string& name, const json& data, const Style& style, const ResourceCollection& resources) {
                     Vec2f size{ data["size"][0], data["size"][1] };
+                    Shape rect = Shape::rectangle({ 0, 0 }, size);
                     ShapeNode* node = new ShapeNode(name,
-                                                    Shape::rectangle({ 0, 0 }, size),
+                                                    rect,
                                                     nullptr,
                                                     size);
                     node->setTint(style.getColor());
